@@ -6,7 +6,7 @@ const mineflayer = require('mineflayer')
 const CONFIG = {
   host: 'n1.ozima.cloud',
   port: 25590,
-  username: 'HuyGen',
+  username: 'RoPoint',
   reconnectDelay: 5000,      // base delay in ms (doubles each attempt, max 60s)
   antiAfkInterval: 30000,    // ms between anti-afk actions
   logChat: true,
