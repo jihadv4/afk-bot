@@ -35,6 +35,20 @@ function patchClient(client) {
 }
 
 function createBot() {
+  bot.on('kicked', (reason) => {
+  let msg = reason
+  try { msg = JSON.parse(reason)?.text || reason } catch (_) {}
+  console.log(`🚫  [${timestamp()}] Kicked: ${msg}`)
+
+  // Sonar protection — wait longer before reconnecting
+  if (typeof reason === 'string' && reason.includes('sonar')) {
+    console.log(`🛡️   [${timestamp()}] Sonar detected — waiting 30s...`)
+    setTimeout(() => handleDisconnect(), 30000)
+    return
+  }
+
+  handleDisconnect()
+})
   if (bot) {
     try { bot.quit() } catch (_) {}
     bot = null
@@ -56,17 +70,20 @@ function createBot() {
   patchClient(bot._client)
 
   // ── Spawn ──────────────────────────────────────────────────
-  bot.once('spawn', () => {
-    isConnected = true
-    startTime = Date.now()
-    reconnectCount === 0
-      ? console.log(`\n✅  [${timestamp()}] Joined the server as ${CONFIG.username}`)
-      : console.log(`\n✅  [${timestamp()}] Reconnected as ${CONFIG.username} (attempt #${reconnectCount})`)
-    console.log(`    Server: ${CONFIG.host}:${CONFIG.port}\n`)
+bot.once('spawn', () => {
+  isConnected = true
+  startTime = Date.now()
+  reconnectCount === 0
+    ? console.log(`\n✅  [${timestamp()}] Joined the server as ${CONFIG.username}`)
+    : console.log(`\n✅  [${timestamp()}] Reconnected as ${CONFIG.username} (attempt #${reconnectCount})`)
+  console.log(`    Server: ${CONFIG.host}:${CONFIG.port}\n`)
 
+  // Wait for Sonar verification before doing anything
+  setTimeout(() => {
     startAntiAfk()
     startStatusPrinter()
-  })
+  }, 5000)
+})
 
   // ── Chat ───────────────────────────────────────────────────
   bot.on('message', (jsonMsg) => {
