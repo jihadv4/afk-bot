@@ -33,8 +33,8 @@ A terminal-based Minecraft AFK bot built with [mineflayer](https://github.com/Pr
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/afkbot.git
-cd afkbot
+git clone https://github.com/jihadv4/afk-bot.git
+cd afk-bot
 ```
 
 ### 2. Install dependencies
