@@ -3,9 +3,9 @@ const logger = require('./logger')
 const terminalUI = require('./terminalUI')
 
 const CONFIG = {
-  host: 'node-2.banglaverse.net',
+  host: 'your.server.address',
   port: 25756,
-  username: 'RoPoint',
+  username: 'YOUR_USENAME',
   version: '1.21.10',
   reconnectDelay: 5000,
   logChat: true,
