@@ -1,0 +1,10 @@
+{
+  "host": "your.server.address",
+  "port": 25565,
+  "username": "YourUsername",
+  "version": "1.21.10",
+  "reconnectDelay": 5000,
+  "logChat": true,
+  "statusIntervalMs": 30000,
+  "physicsEnabled": false
+}

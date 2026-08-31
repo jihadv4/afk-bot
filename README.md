@@ -45,20 +45,28 @@ npm install
 
 ### 3. Configure the bot
 
-Open `bot.js` and edit the `CONFIG` object at the top:
+Copy the example config and fill in your server details:
 
-```js
-const CONFIG = {
-  host: 'your.server.address',    // Server IP or hostname
-  port: 25565,                     // Server port
-  username: 'YourUsername',        // Bot's username (offline mode)
-  version: '1.21.10',             // Minecraft version
-  reconnectDelay: 5000,           // Base reconnect delay (ms)
-  logChat: true,                  // Show chat messages in terminal
-  statusIntervalMs: 30000,        // Status report interval (ms)
-  physicsEnabled: false,          // Keep false to avoid anti-cheat flags
+```bash
+cp config.example.json config.json
+```
+
+Then edit `config.json`:
+
+```json
+{
+  "host": "your.server.address",
+  "port": 25565,
+  "username": "YourUsername",
+  "version": "1.21.10",
+  "reconnectDelay": 5000,
+  "logChat": true,
+  "statusIntervalMs": 30000,
+  "physicsEnabled": false
 }
 ```
+
+> **Note:** `config.json` is gitignored — your server details will never be pushed.
 
 ### 4. Start the bot
 

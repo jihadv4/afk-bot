@@ -2,16 +2,15 @@ const mineflayer = require('mineflayer')
 const logger = require('./logger')
 const terminalUI = require('./terminalUI')
 
-const CONFIG = {
-  host: 'node-2.banglaverse.net',
-  port: 25756,
-  username: 'RoPoint',
-  version: '1.21.10',
-  reconnectDelay: 5000,
-  logChat: true,
-  statusIntervalMs: 30000,
-  physicsEnabled: false, // Disabled: prevents client-side gravity simulation from sending conflicting fly/falling packets
+const fs = require('fs')
+const path = require('path')
+
+const configPath = path.join(__dirname, 'config.json')
+if (!fs.existsSync(configPath)) {
+  console.error('ERROR: config.json not found. Copy config.example.json to config.json and fill in your details.')
+  process.exit(1)
 }
+const CONFIG = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
 
 let bot = null
 let reconnectTimer = null
